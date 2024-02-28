@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import org.hibernate.SessionFactory;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 /**
  *
  * @author francisco
@@ -16,6 +18,13 @@ import java.util.logging.Logger;
 public class DAPP01Practica01 {
 
     public static void main(String[] args) {
+        SessionFactory sf=   HibernateUtil.getSessionFactory();
+       
+         
+        
+        
+        
+    
        Scanner scanner = new Scanner(System.in);
             int opcion = 0;
             System.out.println("1. Agregar");
@@ -35,7 +44,7 @@ public class DAPP01Practica01 {
                     String telefono = scanner.next();
                  
                     PojoEmpleado empleado = new PojoEmpleado();
-                    DAOEmpleado daoemp= new DAOEmpleado();
+                    daoempleado daoemp= new daoempleado();
           
                     empleado.setId(0);
                     empleado.setNombre(nombre);
@@ -99,4 +108,6 @@ public class DAPP01Practica01 {
 
 }
     }
+
+
 

@@ -56,7 +56,7 @@ public class ConexionDB {
    }
     
    
-public List select(SelectionDB sel){
+public List select(SelectionDB sel){// regresar un selectiondb
 return sel.select(con);
 }
    
