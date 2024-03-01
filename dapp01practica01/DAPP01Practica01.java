@@ -64,16 +64,17 @@ public class DAPP01Practica01 {
                       //venta.setDetalleVenta(detalleVenta);
             
             daoventa.Save(venta);
-DaoDetalleVenta detalleventa = new DaoDetalleVenta();
+Session session = sf.getCurrentSession();
+Transaction transaction = session.beginTransaction();
               for (int i =0; i < 5; i++){
               Detalleventa det = new Detalleventa();
               det.setPrecio(800);
               det.setCantidad(3);
               det.setProducto("pizza");
               det.setVenta(venta);
-              detalleventa.Save(det);
+              session.persist(det);
               }
-
+transaction.commit();
     break;
                 }
                 
