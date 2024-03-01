@@ -35,7 +35,7 @@ SessionFactory sf=   HibernateUtil.getSessionFactory();
     }
 
     @Override
-    public boolean Delete(int id) {
+    public boolean Delete(long id) {
            Session session = sf.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Venta venta = session.get(Venta.class, id);
@@ -45,7 +45,7 @@ SessionFactory sf=   HibernateUtil.getSessionFactory();
     }
 
     @Override
-    public List<Venta> Findbyid(int id) {
+    public List<Venta> Findbyid(long id) {
           Session session = sf.getCurrentSession();
     Transaction transaction = null;
     List<Venta> resultList = null;
@@ -54,7 +54,7 @@ SessionFactory sf=   HibernateUtil.getSessionFactory();
         transaction = session.beginTransaction();
 
         // Utilizamos una consulta HQL para buscar objetos por su identificador
-        String hql = "FROM PojoEmpleado WHERE id = :id";
+        String hql = "FROM Venta WHERE id = :id";
         Query query = session.createQuery(hql);
         query.setParameter("id", id);
         

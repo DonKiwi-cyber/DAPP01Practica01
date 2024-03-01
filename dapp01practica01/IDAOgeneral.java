@@ -13,8 +13,8 @@ import java.util.List;
 public interface IDAOgeneral<T> {//ID
     public boolean Save (T p);
     public boolean Edit (T p);
-    public boolean Delete (int id);// T pojo, ID id
-    public List <T>  Findbyid (int id); //    public T <T>  Findbyid (ID id);
+    public boolean Delete (long id);// T pojo, ID id
+    public List <T>  Findbyid (long id); //    public T <T>  Findbyid (ID id);
     public List <T> FindAll();
     
     
