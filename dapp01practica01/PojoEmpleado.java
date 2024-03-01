@@ -10,13 +10,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
-@Entity(name = "empleadotemporal")
+@Entity(name = "empleadosuv")
 public class PojoEmpleado implements Serializable{
  @Id
  @Column(name = "id") 
- @GeneratedValue(strategy = GenerationType.SEQUENCE)
- private int id;
+ @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "empleadosuv_id_seq")
+ @SequenceGenerator(name = "empleadosuv_id_seq", initialValue = 1, allocationSize = 1)
+ private long id;
  
  
  @Column(name = "nombre") 
@@ -26,11 +28,11 @@ public class PojoEmpleado implements Serializable{
   @Column(name = "telefono") 
  private String telefono;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

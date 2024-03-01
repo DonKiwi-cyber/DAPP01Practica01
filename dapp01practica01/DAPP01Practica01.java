@@ -4,6 +4,10 @@
 
 package org.uv.dapp01practica01;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -17,9 +21,9 @@ import org.hibernate.Transaction;
  */
 public class DAPP01Practica01 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         SessionFactory sf=   HibernateUtil.getSessionFactory();
-       
+
          
         
         
@@ -36,52 +40,69 @@ public class DAPP01Practica01 {
 
             switch (opcion) {
                 case 1: {
-                    System.out.println("Inserte nombre");
-                    String nombre = scanner.next();
-                    System.out.println("Inserte direccion");
-                    String direccion = scanner.next();
-                    System.out.println("Inserte telefono");
-                    String telefono = scanner.next();
-                 
-                    PojoEmpleado empleado = new PojoEmpleado();
-                    daoempleado daoemp= new daoempleado();
-          
-                    empleado.setId(0);
-                    empleado.setNombre(nombre);
-                    empleado.setDireccion(direccion);
-                    empleado.setTelefono(telefono);
-                    daoemp.Save(empleado);
+                  
+           System.out.println("Inserte la fecha (en formato AAAA-MM-DD): ");
+        String fechaStr = scanner.next();
+        
+    
+            Date sqlDate = Date.valueOf(fechaStr);
+            
+            System.out.println("Inserte nombre del cliente: ");
+            String nombre = scanner.next();
+            
+            System.out.println("Inserte el total: ");
+            double total = scanner.nextDouble();
+            
+            Venta venta = new Venta();
+            DaoVenta daoventa = new DaoVenta();
+            
+            venta.setFecha(sqlDate);
+            venta.setCliente(nombre);
+            venta.setTotal(total);
+            
+            
+                      //venta.setDetalleVenta(detalleVenta);
+            
+            daoventa.Save(venta);
+DaoDetalleVenta detalleventa = new DaoDetalleVenta();
+              for (int i =0; i < 5; i++){
+              Detalleventa det = new Detalleventa();
+              det.setPrecio(800);
+              det.setCantidad(3);
+              det.setProducto("pizza");
+              det.setVenta(venta);
+              detalleventa.Save(det);
+              }
 
-                    if (daoemp.Save(empleado)!=true){
+    break;
+                }
+                
+                case 2: {
+                    System.out.println("Inserte el id ");
+                    long id = scanner.nextLong();
+                    System.out.println("Inserte la fecha ");
+                    String fecha = scanner.next();
+                    Date sqlDate = Date.valueOf(fecha);
+                    System.out.println("Inserte nombre del cliente ");
+                    String nombre = scanner.next();
+                    System.out.println("Inserte inserte el total");
+                    double total = scanner.nextDouble();
+                 
+                    Venta venta = new Venta();
+                    DaoVenta daoventa = new DaoVenta();
+                    
+                    
+                    venta.setId(id);
+                    venta.setFecha(sqlDate);
+                    venta.setCliente(nombre);
+                    venta.setTotal(total);
+                    daoventa.Edit(venta);
+
+                    if (daoventa.Edit(venta)!=true){
                         System.out.println("error");
                     }
                         
                         ;
-                    break;
-                }
-                case 2: {
-                    System.out.println("Inserte clave ");
-                    int clave = scanner.nextInt();
-                    System.out.println("Inserte nombre");
-                    String nombre = scanner.next();
-                    System.out.println("Inserte direccion");
-                    String direccion = scanner.next();
-                    System.out.println("Inserte telefono");
-                    String telefono = scanner.next();
-                
-                    PojoEmpleado empleado = new PojoEmpleado();
-                    DAOEmpleado daoemp = new DAOEmpleado();
-
-                    empleado.setId(clave);
-                    empleado.setNombre(nombre);
-                    empleado.setDireccion(direccion);
-                    empleado.setTelefono(telefono);
-              
-
-                    daoemp.Edit(empleado);
-
-                    
-                   
                     break;
 
                 }
@@ -89,18 +110,18 @@ public class DAPP01Practica01 {
                
                     System.out.println("Inserte clave de empleado");
                     int clave = scanner.nextInt();
-                    DAOEmpleado daoemp = new DAOEmpleado();
-                    daoemp.Delete(clave);
+                      DaoVenta daoventa = new DaoVenta();
+                    daoventa.Delete(clave);
                     break;
                 }
                 case 4: {
                 System.out.println("Inserte clave de empleado");
                 int clave = scanner.nextInt();
-                DAOEmpleado daoemp = new DAOEmpleado();
+                 DaoVenta daoventa = new DaoVenta();
 
-                List<PojoEmpleado> stEmpleado = daoemp.Findbyid(clave);
-                for (PojoEmpleado emp : stEmpleado) {
-                    Logger.getLogger(DAPP01Practica01.class.getName()).log(Level.INFO, "clave..." + emp.getId()+ "...nombre..." + emp.getNombre() + "...direccion..." + emp.getDireccion() + "...Telefono..." + emp.getTelefono());
+                List<Venta> stventa = daoventa.Findbyid(clave);
+                for (Venta venta : stventa) {
+                    Logger.getLogger(DAPP01Practica01.class.getName()).log(Level.INFO, "clave..." + venta.getId() +"...nombre..." + venta.getFecha() + "...direccion..." + venta.getCliente()+ "...Telefono..." +venta.getTotal());
                 }
             }
         }

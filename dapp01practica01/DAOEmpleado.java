@@ -58,7 +58,7 @@ public class DAOEmpleado implements IDAOgeneral<PojoEmpleado> {//pojoempleado, I
                      String sql = "update empleadotemporal set nombre=?, direccion=?, telefono=? WHERE id=?";
                      
                      PreparedStatement pstm = con.prepareStatement(sql);
-                     pstm.setInt(4, p.getId());
+                     pstm.setLong(4, p.getId());
                      pstm.setString(1, p.getNombre());
                      pstm.setString(2, p.getDireccion());
                      pstm.setString(3, p.getTelefono());
