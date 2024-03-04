@@ -21,6 +21,12 @@ SessionFactory sf=   HibernateUtil.getSessionFactory();
              Session session = sf.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         session.save(venta);
+        
+        for (Detalleventa det : venta.getDetalleVenta()){
+        session.save(det);
+        }
+        
+        
         transaction.commit();
         return true;
     }

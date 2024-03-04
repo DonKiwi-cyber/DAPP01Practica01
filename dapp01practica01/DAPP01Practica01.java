@@ -100,14 +100,14 @@ public class DAPP01Practica01 {
                     det.setCantidad(6);
                     det.setProducto("Producto: " + (i + 1));
                     det.setVenta(venta);
-                    session.persist(det);
+//                    session.persist(det);
                 }
                 transaction.commit();
                 break;
 
             }
             case 3: {
-                System.out.println("Inserte clave de empleado");
+                System.out.println("Inserte clave ");
                 long clave = scanner.nextLong();
                 DaoVenta daoventa = new DaoVenta();
 
@@ -122,7 +122,7 @@ public class DAPP01Practica01 {
                 break;
             }
             case 4: {
-                System.out.println("Inserte clave de empleado");
+                System.out.println("Inserte clave ");
                 int clave = scanner.nextInt();
                 DaoVenta daoventa = new DaoVenta();
 
